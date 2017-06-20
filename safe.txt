@@ -1,0 +1,11 @@
+<div class="news_wrapper">
+        <div class="user_info">
+            <div class="user_ico"></div>
+            <div class="user_name">Dmitry Dubinin</div>
+        </div>
+        <div class="news_container">
+            <div class="news_title">Lorem ipsum</div>
+            <div class="news_text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusamus architecto aspernatur assumenda blanditiis consequatur culpa dolore dolorem, eum id impedit incidunt officia quas qui sunt ut. Consequatur provident sit unde.</div>
+        </div>
+    </div>
+    <hr>
