@@ -28,9 +28,9 @@ if (isset($_SESSION['id']))
         <div class="positioner">
             <ul class="nav-menu-list">
                 <li class="nav-menu-item"><a href="http://studway/profile.php" class="nav-menu-link">Профиль</a></li>
-                <li class="nav-menu-item"><a href="http://studway/news.php" class="nav-menu-link">Новости</a></li>
                 <li class="nav-menu-item"><a href="http://studway/galery.php" class="nav-menu-link">Фото</a></li>
-                <li class="nav-menu-item"><a href="http://studway/registration.php" class="nav-menu-link">Регистрация</a></li>
+                <li class="nav-menu-item"><a href="http://studway/apps.php" class="nav-menu-link">Приложения</a></li>
+                <li class="nav-menu-item"><a href="http://studway/news.php" class="nav-menu-link">Новости</a></li>
             </ul>
         </div>
     </nav>
@@ -38,16 +38,15 @@ if (isset($_SESSION['id']))
     <section class="greeting">
         <div>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Assumenda dolore eum impedit labore modi quisquam similique ullam vitae voluptas. Commodi cumque minima modi nisi, officia quidem ratione reiciendis reprehenderit. Eius.
         </div>
-        <div>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Assumenda dolore eum impedit labore modi quisquam similique ullam vitae voluptas. Commodi cumque minima modi nisi, officia quidem ratione reiciendis reprehenderit. Eius.
-        </div>
-        <div>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Assumenda dolore eum impedit labore modi quisquam similique ullam vitae voluptas. Commodi cumque minima modi nisi, officia quidem ratione reiciendis reprehenderit. Eius.
-        </div>
     </section>
     <section class="log_form">
         <form action="/redirect.php" method="post">
             <input type="text" class="form_element" name="login"  placeholder="Login">
-            <input type="password" class="form_element" name="pswd" placeholder="Password">
-            <input type="submit" class=" btn btn-primary form_element log_btn" name="log_submit" value="LogIn">
+            <input type="text" class="form_element" name="name"  placeholder="Name">
+            <input type="text" class="form_element" name="surname"  placeholder="Surname">
+            <input type="password" class="form_element" name="pswd1" placeholder="Password">
+            <input type="password" class="form_element" name="pswd2" placeholder="Password">
+            <input type="submit" class=" btn btn-primary form_element log_btn" name="reg_submit" value="LogIn">
         </form>
     </section>
 

@@ -20,6 +20,10 @@ if (isset($_POST['log_submit'])){
     }
 
 }
+if (isset($_POST['reg_submit'])){
+user::store_user($_POST['login'],$_POST['pswd'],$_POST['name'],$_POST['surname']);
+}
+
 if (isset($_GET['action'])){
    switch ($_GET['action']){
        case "log_out":
