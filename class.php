@@ -13,71 +13,54 @@ class user
 {
     private $name, $surname, $id, $ico;
 
-    /**
-     * @return mixed
-     */
     public function getName()
     {
         return $this->name;
     }
 
-    /**
-     * @param mixed $name
-     */
+
     public function setName($name)
     {
         $this->name = $name;
     }
 
-    /**
-     * @return mixed
-     */
+
     public function getSurname()
     {
         return $this->surname;
     }
 
-    /**
-     * @param mixed $surname
-     */
+
     public function setSurname($surname)
     {
         $this->surname = $surname;
     }
 
-    /**
-     * @return mixed
-     */
+
     public function getId()
     {
         return $this->id;
     }
 
-    /**
-     * @param mixed $id
-     */
+
     public function setId($id)
     {
         $this->id = $id;
     }
 
-    /**
-     * @return mixed
-     */
+
     public function getIco()
     {
         return $this->ico;
     }
 
-    /**
-     * @param mixed $ico
-     */
+
     public function setIco($ico)
     {
         $this->ico = $ico;
     }
 
-    function __construct($login, $pswd)
+    function load_user($login, $pswd)
     {
         $mysqli = connect();
         $sql = "SELECT * FROM users WHERE log = '$login' AND pass = '$pswd'";

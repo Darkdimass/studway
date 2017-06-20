@@ -46,7 +46,7 @@ if (isset($_SESSION['user']))
         <form action="/redirect.php" method="post">
             <input type="text" class="form_element" name="login"  placeholder="Login">
             <input type="password" class="form_element" name="pswd" placeholder="Password">
-            <input type="submit" class=" btn btn-primary form_element log_btn" name="log" value="LogIn">
+            <input type="submit" class=" btn btn-primary form_element log_btn" name="log_submit" value="LogIn">
         </form>
     </section>
 

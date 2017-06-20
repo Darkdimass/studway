@@ -10,8 +10,8 @@ session_start();
 require_once "function.php";
 require_once "class.php";
 new user("dark","1111");
-$try = new news();
-$try->load_all();
+$news = new news();
+$news->load_all();
 
 //if (!isset($_SESSION['user']))
 //{header('Location: http://studway');}
@@ -45,15 +45,15 @@ $try->load_all();
 <section id="top" class="main_logo"></section>
 <section class="newsPage">
 <?
-for ($i = 0; $i < count($try->title); $i++){
+for ($i = 0; $i < count($news->title); $i++){
     echo "<div class=\"news_wrapper\">
         <div class=\"user_info\">
-            <div class=\"user_ico\" style=\"background-image: url('{$try->author_ico["$i"]}')\"></div>
-            <div class=\"user_name\">{$try->author_name["$i"]} {$try->author_surname["$i"]}</div>
+            <div class=\"user_ico\" style=\"background-image: url('{$news->author_ico["$i"]}')\"></div>
+            <div class=\"user_name\">{$news->author_name["$i"]} {$news->author_surname["$i"]}</div>
         </div>
         <div class=\"news_container\">
-            <div class=\"news_title\">{$try->title["$i"]}</div>
-            <div class=\"news_text\">{$try->text["$i"]}</div>
+            <div class=\"news_title\">{$news->title["$i"]}</div>
+            <div class=\"news_text\">{$news->text["$i"]}</div>
         </div>
     </div>
     <hr>";
