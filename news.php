@@ -9,7 +9,6 @@
 session_start();
 require_once "function.php";
 require_once "class.php";
-new user("dark","1111");
 $news = new news();
 $news->load_all();
 
@@ -34,11 +33,11 @@ $news->load_all();
 <nav id="nav" class="nav">
     <div class="positioner">
         <ul class="nav-menu-list">
-            <li class="nav-menu-item"><a href="#profile" class="nav-menu-link">Профиль</a></li>
-            <li class="nav-menu-item"><a href="#Photo" class="nav-menu-link">Фото</a></li>
-            <li class="nav-menu-item"><a href="#apps" class="nav-menu-link">Приложения</a></li>
-            <li class="nav-menu-item"><a href="#news" class="nav-menu-link">Новости</a></li>
+            <li class="nav-menu-item"><a href="http://studway/profile.php?id=<?echo $_SESSION['id'];?>" class="nav-menu-link">Профиль</a></li>
+            <li class="nav-menu-item"><a href="#http://studway/galery.php" class="nav-menu-link">Фото</a></li>
+            <li class="nav-menu-item"><a href="#http://studway/apps.php" class="nav-menu-link">Приложения</a></li>
             <li class="nav-menu-item"><a href="#top" class="nav-menu-link">В начало страницы</a></li>
+            <li class="nav-menu-item"><a href="#bottom" class="nav-menu-link">В конец страницы</a></li>
         </ul>
     </div>
 </nav>
@@ -58,6 +57,7 @@ for ($i = 0; $i < count($news->title); $i++){
     </div>
     <hr>";
 }
+echo "<div id=\"bottom\"></div>";
 ?>
 
 </section>
@@ -83,7 +83,7 @@ for ($i = 0; $i < count($news->title); $i++){
     $(document).ready(function(){
         $("#nav").on("click","a", function (event) {
             //отменяем стандартную обработку нажатия по ссылке
-            event.preventDefault();
+//            event.preventDefault();
             //забираем идентификатор бока с атрибута href
             var id  = $(this).attr('href'),
                 //узнаем высоту от начала страницы до блока на который ссылается якорь

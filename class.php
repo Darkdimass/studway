@@ -18,42 +18,35 @@ class user
         return $this->name;
     }
 
-
     public function setName($name)
     {
         $this->name = $name;
     }
-
 
     public function getSurname()
     {
         return $this->surname;
     }
 
-
     public function setSurname($surname)
     {
         $this->surname = $surname;
     }
-
 
     public function getId()
     {
         return $this->id;
     }
 
-
     public function setId($id)
     {
         $this->id = $id;
     }
 
-
     public function getIco()
     {
         return $this->ico;
     }
-
 
     public function setIco($ico)
     {
@@ -71,14 +64,31 @@ class user
             $this->surname = $db['surname'];
             $this->id = $db['id'];
             $this->ico = $db['ico'];
-            $_SESSION['name'] = $this->name;
-            $_SESSION['surname'] = $this->surname;
-            $_SESSION['id'] = $this->id;
-            $_SESSION['ico'] = $this->ico;
             $mysqli->close();
         } else return null;
     }
+
+    static function store_user($login, $pswd, $name, $surname)
+    {
+        $mysqli = connect();
+        $sql = "SELECT log FROM users WHERE log = '$login'";
+        $result = mysqli_query($mysqli, $sql);
+        $result = $result->fetch_array();
+        if (!isset($result)){
+        $sql = "INSERT INTO users (log,pass,name,surname) VALUES ('$login','$pswd','$name','$surname')";
+        mysqli_query($mysqli, $sql);
+        }
+        $mysqli->close();
+    }
+
+    function access_granted(){
+        $_SESSION['name'] = $this->name;
+        $_SESSION['surname'] = $this->surname;
+        $_SESSION['id'] = $this->id;
+        $_SESSION['ico'] = $this->ico;
+    }
 }
+
 class news
 {
     public $title, $text, $author_name, $author_surname, $author_ico, $author_id;

@@ -6,8 +6,10 @@
  * Time: 17:15
  */
 session_start();
-if (isset($_SESSION['user']))
-{header('Location: http://studway/userlink');}
+require_once "function.php";
+require_once "class.php";
+if (isset($_SESSION['id']))
+{header("Location: http://studway/profile.php?id={$_SESSION['id']}");}
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -25,21 +27,20 @@ if (isset($_SESSION['user']))
     <nav id="nav" class="nav">
         <div class="positioner">
             <ul class="nav-menu-list">
-                <li class="nav-menu-item"><a href="#profile" class="nav-menu-link">Профиль</a></li>
-                <li class="nav-menu-item"><a href="#Photo" class="nav-menu-link">Фото</a></li>
-                              <li class="nav-menu-item"><a href="#apps" class="nav-menu-link">Приложения</a></li>
-                <li class="nav-menu-item"><a href="#news" class="nav-menu-link">Новости</a></li>
+                <li class="nav-menu-item"><a href="http://studway/profile.php" class="nav-menu-link">Профиль</a></li>
+                <li class="nav-menu-item"><a href="http://studway/galery.php" class="nav-menu-link">Фото</a></li>
+                <li class="nav-menu-item"><a href="http://studway/apps.php" class="nav-menu-link">Приложения</a></li>
+                <li class="nav-menu-item"><a href="http://studway/news.php" class="nav-menu-link">Новости</a></li>
             </ul>
         </div>
     </nav>
     <section class="main_logo"></section>
     <section class="greeting">
-        <div>
-            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Assumenda dolore eum impedit labore modi quisquam similique ullam vitae voluptas. Commodi cumque minima modi nisi, officia quidem ratione reiciendis reprehenderit. Eius.
-        </div> <div>
-            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Assumenda dolore eum impedit labore modi quisquam similique ullam vitae voluptas. Commodi cumque minima modi nisi, officia quidem ratione reiciendis reprehenderit. Eius.
-        </div> <div>
-            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Assumenda dolore eum impedit labore modi quisquam similique ullam vitae voluptas. Commodi cumque minima modi nisi, officia quidem ratione reiciendis reprehenderit. Eius.
+        <div>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Assumenda dolore eum impedit labore modi quisquam similique ullam vitae voluptas. Commodi cumque minima modi nisi, officia quidem ratione reiciendis reprehenderit. Eius.
+        </div>
+        <div>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Assumenda dolore eum impedit labore modi quisquam similique ullam vitae voluptas. Commodi cumque minima modi nisi, officia quidem ratione reiciendis reprehenderit. Eius.
+        </div>
+        <div>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Assumenda dolore eum impedit labore modi quisquam similique ullam vitae voluptas. Commodi cumque minima modi nisi, officia quidem ratione reiciendis reprehenderit. Eius.
         </div>
     </section>
     <section class="log_form">

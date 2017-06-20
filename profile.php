@@ -9,7 +9,6 @@
 session_start();
 require_once "function.php";
 require_once "class.php";
-new user("dark","1111");
 $news = new news();
 $news->load_all();
 
@@ -41,12 +40,12 @@ $mysqli->close();
 <nav id="nav" class="nav">
     <div class="positioner">
         <ul class="nav-menu-list">
-            <li class="nav-menu-item"><a href="#profile" class="nav-menu-link">Профиль</a></li>
-            <li class="nav-menu-item"><a href="#Photo" class="nav-menu-link">Фото</a></li>
-            <li class="nav-menu-item"><a href="#apps" class="nav-menu-link">Приложения</a></li>
-            <li class="nav-menu-item"><a href="#news" class="nav-menu-link">Новости</a></li>
+            <li class="nav-menu-item"><a href="http://studway/profile.php?id=<?echo $_SESSION['id'];?>" class="nav-menu-link">Профиль</a></li>
+            <li class="nav-menu-item"><a href="http://studway/apps.php" class="nav-menu-link">Приложения</a></li>
+            <li class="nav-menu-item"><a href="http://studway/news.php" class="nav-menu-link">Новости</a></li>
             <li class="nav-menu-item"><a href="#top" class="nav-menu-link">В начало страницы</a></li>
             <li class="nav-menu-item"><a href="#bottom" class="nav-menu-link">В конец страницы</a></li>
+            <li class="nav-menu-item"><a href="http://studway/redirect.php?action=log_out" class="nav-menu-link">log Out</a></li>
         </ul>
     </div>
 </nav>
@@ -119,13 +118,13 @@ $mysqli->close();
     $(document).ready(function(){
         $("#nav").on("click","a", function (event) {
             //отменяем стандартную обработку нажатия по ссылке
-            event.preventDefault();
+//            event.preventDefault();
             //забираем идентификатор бока с атрибута href
             var id  = $(this).attr('href'),
                 //узнаем высоту от начала страницы до блока на который ссылается якорь
                 top = $(id).offset().top;
             //анимируем переход на расстояние - top за 1500 мс
-            $('body,html').animate({scrollTop: top-$("#nav").height()}, 300);
+            $('body,html').animate({scrollTop: top-$("#nav").height()}, 1500);
         });
     });
 </script>
