@@ -9,7 +9,6 @@ require_once "class.php";
 
 session_start();
 
-
 function connect()
 {
     $mysqli = new mysqli('localhost', 'root', '', 'studway');
@@ -21,3 +20,4 @@ function connect()
     }
     return $mysqli;
 };
+

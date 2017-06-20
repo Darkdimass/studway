@@ -10,16 +10,11 @@ session_start();
 require_once "function.php";
 require_once "class.php";
 $news = new news();
-$news->load_all();
+$news->load_my_news();
 
 
-//if (!isset($_SESSION['user']))
-//{header('Location: http://studway');}
-$mysqli = connect();
-$sql = "SELECT * FROM users INNER JOIN additional_data ON users.id = additional_data.user_id WHERE users.id = '{$_GET['id']}'";
-$result = mysqli_query($mysqli, $sql);
-$src = $result->fetch_array();
-$mysqli->close();
+if (!isset($_SESSION['id']))
+{header('Location: http://studway');}
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -54,14 +49,14 @@ $mysqli->close();
 <section class="profile_logo"></section>
 <section class="profilePage">
     <div class="profile_info">
-        <img class="profileImage" src="<? echo $src['ico'];?>">
-        <div class="name"><? echo $src['surname']," ", $src['name'];?> </div>
+        <img class="profileImage" src="<? echo $_SESSION['ico'];?>">
+        <div class="name"><? echo $_SESSION['surname']," ", $_SESSION['name'];?> </div>
         <div class="data"><hr class="xs">
-            <div>City: <br> <? echo $src['city']?></div><hr class="xs">
-            <div>Counnews: <br> <? echo $src['counnews']?></div><hr class="xs">
-            <div>Interests:<br> <? echo $src['interests']?></div><hr class="xs">
-            <div>About me: <br><? echo $src['about']?></div><hr class="xs">
-            <div>Else: <br><? echo $src['else']?></div><hr class="xs">
+            <div>City: <br> <? echo $_SESSION['city']?></div><hr class="xs">
+            <div>Country: <br> <? echo $_SESSION['country']?></div><hr class="xs">
+            <div>Interests:<br> <? echo $_SESSION['interests']?></div><hr class="xs">
+            <div>About me: <br><? echo $_SESSION['about']?></div><hr class="xs">
+            <div>Else: <br><? echo $_SESSION['else']?></div><hr class="xs">
         </div>
         <div class="media">
             <img src="/img/ico.jpg" class="photo_profile">

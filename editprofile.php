@@ -2,8 +2,8 @@
 /**
  * Created by PhpStorm.
  * User: mater
- * Date: 14.06.2017
- * Time: 19:34
+ * Date: 15.06.2017
+ * Time: 0:03
  */
 
 session_start();
@@ -12,8 +12,14 @@ require_once "class.php";
 $news = new news();
 $news->load_all();
 
-if (!isset($_SESSION['id']))
-{header('Location: http://studway');}
+
+//if (!isset($_SESSION['user']))
+//{header('Location: http://studway');}
+$mysqli = connect();
+$sql = "SELECT * FROM users INNER JOIN additional_data ON users.id = additional_data.user_id WHERE users.id = '{$_GET['id']}'";
+$result = mysqli_query($mysqli, $sql);
+$src = $result->fetch_array();
+$mysqli->close();
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -22,46 +28,43 @@ if (!isset($_SESSION['id']))
     <title>Studway</title>
     <link href="https://fonts.googleapis.com/css?family=Roboto:400,700,900" rel="stylesheet">
     <link rel="stylesheet" href="css/style.css">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap-theme.min.css">
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/bootstrap-theme.min.css">
+    <script src="/js/bootstrap.min.js"></script>
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <script src="/js/jquery-3.2.1.min.js"></script>
     <script src="/js/ajax.js"></script>
 </head>
-<body class="login_page">
+<body id="top" class="login_page">
+
 <nav id="nav" class="nav">
     <div class="positioner">
         <ul class="nav-menu-list">
             <li class="nav-menu-item"><a href="http://studway/profile.php?id=<?echo $_SESSION['id'];?>" class="nav-menu-link">Профиль</a></li>
-            <li class="nav-menu-item"><a href="#http://studway/galery.php" class="nav-menu-link">Фото</a></li>
-            <li class="nav-menu-item"><a href="#http://studway/apps.php" class="nav-menu-link">Приложения</a></li>
-            <li class="nav-menu-item"><a href="#top" class="nav-menu-link">В начало страницы</a></li>
-            <li class="nav-menu-item"><a href="#bottom" class="nav-menu-link">В конец страницы</a></li>
+            <li class="nav-menu-item"><a href="http://studway/apps.php" class="nav-menu-link">Приложения</a></li>
+            <li class="nav-menu-item"><a href="http://studway/news.php" class="nav-menu-link">Новости</a></li>
             <li class="nav-menu-item"><a href="http://studway/redirect.php?action=log_out" class="nav-menu-link">log Out</a></li>
         </ul>
     </div>
 </nav>
-<section id="top" class="main_logo"></section>
-<section class="newsPage">
-<?
-for ($i = 0; $i < count($news->title); $i++){
-    echo "<div class=\"news_wrapper\">
-        <div class=\"user_info\">
-            <div class=\"user_ico\" style=\"background-image: url('{$news->author_ico["$i"]}')\"></div>
-            <div class=\"user_name\">{$news->author_name["$i"]} {$news->author_surname["$i"]}</div>
-        </div>
-        <div class=\"news_container\">
-            <div class=\"news_title\">{$news->title["$i"]}</div>
-            <div class=\"news_text\">{$news->text["$i"]}</div>
+
+
+<section class="profile_logo"></section>
+<section contenteditable="true" class="profilePage">
+    <div class="profile_info">
+        <img class="profileImage" src="<? echo $src['ico'];?>">
+        <div class="name"><? echo $src['surname']," ", $src['name'];?> </div>
+        <div  class="data"><hr class="xs">
+            <div>City: <br> <? echo $src['city']?></div><hr class="xs">
+            <div>Counnews: <br> <? echo $src['counnews']?></div><hr class="xs">
+            <div>Interests:<br> <? echo $src['interests']?></div><hr class="xs">
+            <div>About me: <br><? echo $src['about']?></div><hr class="xs">
+            <div>Else: <br><? echo $src['else']?></div><hr class="xs">
         </div>
     </div>
-    <hr>";
-}
-echo "<div id=\"bottom\"></div>";
-?>
 
 </section>
+
 <script type="text/javascript" src="js/jquery-3.2.1.min.js"></script>
 <script type="text/javascript" src="slick/slick.min.js"></script>
 <script type="text/javascript">
@@ -90,7 +93,7 @@ echo "<div id=\"bottom\"></div>";
                 //узнаем высоту от начала страницы до блока на который ссылается якорь
                 top = $(id).offset().top;
             //анимируем переход на расстояние - top за 1500 мс
-            $('body,html').animate({scrollTop: top-$("#nav").height()}, 300);
+            $('body,html').animate({scrollTop: top-$("#nav").height()}, 1500);
         });
     });
 </script>
@@ -104,4 +107,6 @@ echo "<div id=\"bottom\"></div>";
 <!--        }-->
 <!--    });-->
 <!--</script>-->
+
+
 </body>

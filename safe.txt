@@ -9,3 +9,24 @@
         </div>
     </div>
     <hr>
+
+
+
+
+
+
+    <section class="log_form">
+            <form action="/redirect.php" method="post">
+                <?
+                if($_GET['action']=='wrongpswd'){echo "<div id='msg' class=\"res\">Пароли не совпадают!!!</div>";}
+                elseif($_GET['action']=='wronglog'){echo "<div id='msg' class=\"res\">Данный логин уже занят</div>";}
+                ?>
+                <input id="log" type="text" class="form_element" name="login"  placeholder="Login">
+                <input id="pswd1" type="password" class="form_element" name="pswd1" placeholder="Password">
+                <input id="pswd2" type="password" class="form_element" name="pswd" placeholder="Password">
+                <input type="text" class="form_element" name="name"  placeholder="Name">
+                <input type="text" class="form_element" name="surname"  placeholder="Surname">
+                <div id="res">Повторное введение пароля</div>
+                <input type="submit" class=" btn btn-primary form_element log_btn" name="reg_submit" value="LogIn">
+            </form>
+        </section>

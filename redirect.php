@@ -9,10 +9,10 @@ session_start();
 require_once "function.php";
 require_once "class.php";
 if (isset($_POST['log_submit'])){
-    $user = new user();
-    $user->load_user($_POST['login'],$_POST['pswd']);
+    $user = new user($_POST['login'],$_POST['pswd']);
     $uid = $user->getId();
     if (isset($uid)){
+        $user->load_info();
         $user->access_granted();
         header("Location: http://studway/profile.php?id={$user->getId()}");
     }else{
@@ -21,7 +21,21 @@ if (isset($_POST['log_submit'])){
 
 }
 if (isset($_POST['reg_submit'])){
-user::store_user($_POST['login'],$_POST['pswd'],$_POST['name'],$_POST['surname']);
+    if ($_POST['pswd']==$_POST['pswd1']) {
+        $try = user::store_user($_POST['login'], $_POST['pswd'], $_POST['name'], $_POST['surname']);
+        if (!$try){
+            $user = new user($_POST['login'],$_POST['pswd']);
+            $uid = $user->getId();
+            if (isset($uid)){
+                $user->access_granted();
+                header("Location: http://studway/registration.php?id={$user->getId()}");
+            }else{
+                header("Location: http://studway/index.php?alert=access_denied");
+            }
+        }
+        else{header("Location: http://studway/registration.php?action=wronglog");}
+
+    }else{header("Location: http://studway/registration.php?action=wrongpswd");}
 }
 
 if (isset($_GET['action'])){
