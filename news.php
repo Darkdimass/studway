@@ -12,8 +12,8 @@ require_once "class.php";
 $news = new news();
 $news->load_all();
 
-if (!isset($_SESSION['id']))
-{header('Location: http://studway');}
+//if (!isset($_SESSION['user']))
+//{header('Location: http://studway');}
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -38,7 +38,6 @@ if (!isset($_SESSION['id']))
             <li class="nav-menu-item"><a href="#http://studway/apps.php" class="nav-menu-link">Приложения</a></li>
             <li class="nav-menu-item"><a href="#top" class="nav-menu-link">В начало страницы</a></li>
             <li class="nav-menu-item"><a href="#bottom" class="nav-menu-link">В конец страницы</a></li>
-            <li class="nav-menu-item"><a href="http://studway/redirect.php?action=log_out" class="nav-menu-link">log Out</a></li>
         </ul>
     </div>
 </nav>

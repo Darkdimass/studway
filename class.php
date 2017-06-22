@@ -11,67 +11,7 @@ session_start();
 
 class user
 {
-    private $name, $surname, $id, $ico, $city, $country, $interests, $about, $else;
-
-
-    public function getCity()
-    {
-        return $this->city;
-    }
-
-
-    public function setCity($city)
-    {
-        $this->city = $city;
-    }
-
-
-    public function getCountry()
-    {
-        return $this->country;
-    }
-
-
-    public function setCountry($country)
-    {
-        $this->country = $country;
-    }
-
-
-    public function getInterests()
-    {
-        return $this->interests;
-    }
-
-
-    public function setInterests($interests)
-    {
-        $this->interests = $interests;
-    }
-
-
-    public function getAbout()
-    {
-        return $this->about;
-    }
-
-
-    public function setAbout($about)
-    {
-        $this->about = $about;
-    }
-
-
-    public function getElse()
-    {
-        return $this->else;
-    }
-
-
-    public function setElse($else)
-    {
-        $this->else = $else;
-    }
+    private $name, $surname, $id, $ico;
 
     public function getName()
     {
@@ -113,24 +53,19 @@ class user
         $this->ico = $ico;
     }
 
-    function __construct($login, $pswd)
+    function load_user($login, $pswd)
     {
         $mysqli = connect();
-        $sql = "SELECT * FROM users INNER JOIN additional_data ON users.id = additional_data.user_id WHERE users.log = '{$login}' AND users.pswd = '{$pswd}'";
+        $sql = "SELECT * FROM users WHERE log = '$login' AND pass = '$pswd'";
         $result = mysqli_query($mysqli, $sql);
         $db = $result->fetch_array();
         if (isset($db)) {
-            $this->id = $db['id'];
             $this->name = $db['name'];
             $this->surname = $db['surname'];
+            $this->id = $db['id'];
             $this->ico = $db['ico'];
-            $this->city = $db['city'];
-            $this->country = $db['country'];
-            $this->interests = $db['interests'];
-            $this->about = $db['about'];
-            $this->else = $db['else'];
+            $mysqli->close();
         } else return null;
-        $mysqli->close();
     }
 
     static function store_user($login, $pswd, $name, $surname)
@@ -142,7 +77,7 @@ class user
         if (!isset($result)){
         $sql = "INSERT INTO users (log,pass,name,surname) VALUES ('$login','$pswd','$name','$surname')";
         mysqli_query($mysqli, $sql);
-        }else{return "error";}
+        }
         $mysqli->close();
     }
 
@@ -151,11 +86,6 @@ class user
         $_SESSION['surname'] = $this->surname;
         $_SESSION['id'] = $this->id;
         $_SESSION['ico'] = $this->ico;
-        $_SESSION['city'] = $this->city;
-        $_SESSION['country'] = $this->country;
-        $_SESSION['interests'] = $this->interests;
-        $_SESSION['about'] = $this->about;
-        $_SESSION['else'] = $this->else;
     }
 }
 
@@ -179,9 +109,10 @@ class news
         }
         $mysqli->close();
     }
-    function load_my_news(){
+
+    function load_user_news($id){
         $mysqli = connect();
-        $sql = "SELECT * FROM news WHERE author_id = '{$_SESSION['id']}'";
+        $sql = "SELECT * FROM news WHERE author_id = '$id'";
         $result = mysqli_query($mysqli, $sql);
         while($db = $result->fetch_array()){
             $this->author_id = $db['author_id'];
