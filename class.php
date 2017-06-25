@@ -225,3 +225,93 @@ class news
         $mysqli->close();
     }
 }
+
+class gallery{
+    private $id, $author, $img, $title, $small_img, $author_info;
+
+    public function getId()
+    {
+        return $this->id;
+    }
+
+    public function setId($id)
+    {
+        $this->id = $id;
+    }
+
+    public function getAuthor()
+    {
+        return $this->author;
+    }
+
+    public function setAuthor($author)
+    {
+        $this->author = $author;
+    }
+
+    public function getImg()
+    {
+        return $this->img;
+    }
+
+    public function setImg($img)
+    {
+        $this->img = $img;
+    }
+
+    public function getTitle()
+    {
+        return $this->title;
+    }
+
+    public function setTitle($title)
+    {
+        $this->title = $title;
+    }
+
+    public function getSmallImg()
+    {
+        return $this->small_img;
+    }
+
+    public function setSmallImg($small_img)
+    {
+        $this->small_img = $small_img;
+    }
+
+    public function getAuthorInfo()
+    {
+        return $this->author_info;
+    }
+
+    public function setAuthorInfo($author_info)
+    {
+        $this->author_info = $author_info;
+    }
+
+    function load_user_gallery($user_id){
+        $this->author = $user_id;
+        $mysqli = connect();
+        $sql = "SELECT * FROM gallery WHERE author_id = '$user_id'";
+        if (!isset($user_id) and $_SESSION['id'] == 1){
+            $sql = "SELECT * FROM gallery";
+        }
+        $result = mysqli_query($mysqli, $sql);
+        while($db = $result->fetch_array()){
+            $sql1 = "SELECT * FROM users WHERE id = '$this->author'";
+            $result1 = mysqli_query($mysqli, $sql1);
+            $src = $result1->fetch_array();
+            $this->title[]=$db['title'];
+            $this->img[]=$db['img'];
+            $this->id[]=$db['id'];
+            $this->small_img[]=$db['img_s'];
+            $this->author_info=array(
+                "name"=>"{$src['name']}",
+                "surname"=>"{$src['surname']}",
+                "ico"=>"{$src['ico']}"
+            );
+        }
+        $mysqli->close();
+        return count($this->id);
+    }
+}

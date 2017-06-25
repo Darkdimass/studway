@@ -43,6 +43,8 @@ if (isset($_SESSION['id']))
         <form action="/redirect.php" method="post" enctype="multipart/form-data">
             <div id="res"></div>
             <input type="text" class="form_element" name="login"  placeholder="Login">
+            <input id="pswd1" type="password" class="form_element" name="pswd1" placeholder="Password">
+            <input id="pswd2" type="password" class="form_element" name="pswd" placeholder="RE-Password">
             <input type="text" class="form_element" name="name"  placeholder="Name">
             <input type="text" class="form_element" name="surname"  placeholder="Surname">
             <input type="text" class="form_element" name="city"  placeholder="City">
@@ -50,8 +52,6 @@ if (isset($_SESSION['id']))
             <textarea class="form_element area" placeholder="Interests" name="interests"></textarea>
             <textarea class="form_element area" placeholder="About" name="about"></textarea>
             <input type="text" class="form_element" placeholder="Else" name="else">
-            <input id="pswd1" type="password" class="form_element" name="pswd1" placeholder="Password">
-            <input id="pswd2" type="password" class="form_element" name="pswd" placeholder="Password">
             <div class="file_div"><input type="file" class="file" name="file"></div>
             <input type="submit" class=" btn btn-primary form_element log_btn" name="reg_submit" value="LogIn">
             <div id="res"></div>
@@ -59,7 +59,7 @@ if (isset($_SESSION['id']))
     </section>
     <script>
         window.addEventListener("load",function(){
-            document.getElementById("check").addEventListener("идгк",function(){
+            document.getElementById("pswd2").addEventListener("blur",function(){
                 var pswd1 = document.getElementById("pswd1"), pswd2 = document.getElementById("pswd2");
                 if(pswd1.value!=pswd2.value){
                     pswd1.value = "";

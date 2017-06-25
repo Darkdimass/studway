@@ -9,21 +9,6 @@
 session_start();
 require_once "function.php";
 require_once "class.php";
-$news = new news();
-$news->load_user_news($_GET['id']);
-
-
-//if (!isset($_SESSION['user']))
-//{header('Location: http://studway');}
-//$mysqli = connect();
-//$sql = "SELECT * FROM users INNER JOIN additional_data ON users.id = additional_data.user_id WHERE users.id = '{$_GET['id']}'";
-//$result = mysqli_query($mysqli, $sql);
-//$src = $result->fetch_array();
-//$mysqli->close();
-$src = new u_info();
-$src->load_user_info($_GET['id']);
-$user = new user();
-$user->load_profile($_GET['id']);
 $images = new gallery();
 $count = $images->load_user_gallery($_GET['id']);
 $img = $images->getImg();
@@ -52,7 +37,6 @@ $title = $images->getTitle();
     <div class="positioner">
         <ul class="nav-menu-list">
             <li class="nav-menu-item"><a href="http://studway/profile.php?id=<?echo $_SESSION['id'];?>" class="nav-menu-link">Профиль</a></li>
-            <li class="nav-menu-item"><a href="http://studway/gallery.php?id=<?echo $_SESSION['id'];?>" class="nav-menu-link">Галерея</a></li>
             <li class="nav-menu-item"><a href="http://studway/news.php" class="nav-menu-link">Новости</a></li>
             <li class="nav-menu-item"><a href="#top" class="nav-menu-link">В начало страницы</a></li>
             <li class="nav-menu-item"><a href="#bottom" class="nav-menu-link">В конец страницы</a></li>
@@ -63,30 +47,31 @@ $title = $images->getTitle();
 
 
 <section class="profile_logo"></section>
-<section class="profilePage">
-    <div class="profile_info">
-        <img class="profileImage" src="<? echo $user->getIco();?>">
-        <div class="name"><? echo $user->getSurname()," ", $user->getName();?> </div>
-        <div class="data"><hr class="xs">
-            <div>City: <br> <? echo $src->getCity()?></div><hr class="xs">
-            <div>Counnews: <br> <? echo $src->getCountry()?></div><hr class="xs">
-            <div>Interests:<br> <? echo $src->getInterests()?></div><hr class="xs">
-            <div>About me: <br><? echo $src->getAbout()?></div><hr class="xs">
-            <div>Else: <br><? echo $src->getElse()?></div><hr class="xs">
-        </div>
-        <div id="gallery" class="media">
-            <?
 
-            for ($i = 0; $i < $count; $i++){
-                echo "<a href=\"{$img[$i]}\">
-        <img src=\"{$small_img[$i]}\" class='photo_profile'
+<section class="gallery">
+    <div id='gallery'>
+
+    <?
+
+    for ($i = 0; $i < $count; $i++){
+        echo "<a href=\"{$img[$i]}\">
+        <img src=\"{$small_img[$i]}\"
              title=\"{$title[$i]}\">
     </a>";
-            }
-            ?>
-        </div>
-    </div>
+    }
+    echo "<div id=\"bottom\"></div>";
+    ?>
 
+<!--    <a href="img/03.png">-->
+<!--        <img src="img/03s.png"-->
+<!--             title="photo1 title">-->
+<!--    </a>-->
+<!--    <a href="img/slide-1.jpg">-->
+<!--        <img src="img/slide-1s.jpg"-->
+<!--             alt="photo2 title">-->
+<!--    </a>-->
+
+    </div>
     <script>
         // applying photobox on a `gallery` element which has lots of thumbnails links.
         // Passing options object as well:
@@ -100,28 +85,6 @@ $title = $images->getTitle();
             console.log('image has been loaded');
         }
     </script>
-</section>
-<section class="newsProfile">
-    <?
-
-    for ($i = 0; $i < count($news->title); $i++){
-        echo "<div class=\"news_wrapper\">
-        <div class=\"user_info\">
-            <div class=\"user_ico\" style=\"background-image: url('{$news->author_ico["$i"]}')\"></div>
-            <div class=\"user_name\">{$news->author_name["$i"]} {$news->author_surname["$i"]}</div>
-        </div>
-        <div class=\"news_container\">
-            <div class=\"news_title\">{$news->title["$i"]}</div>
-            <div class=\"news_text\">{$news->text["$i"]}</div>
-        </div>
-    </div>
-    <hr>";
-    }
-
-    echo "<div id=\"bottom\"></div>
-";
-    ?>
-
 </section>
 <script type="text/javascript" src="js/jquery-3.2.1.min.js"></script>
 <script type="text/javascript" src="slick/slick.min.js"></script>
@@ -155,17 +118,5 @@ $title = $images->getTitle();
         });
     });
 </script>
-
-<!--<script>-->
-<!--    $.ajax({-->
-<!--        url: "http://studway/ajax.php",-->
-<!--        success: function(data){-->
-<!--            alert( data );-->
-<!--            data = $.parseJSON(data);-->
-<!--            alert( data['key'] );-->
-<!--        }-->
-<!--    });-->
-<!--</script>-->
-
-
 </body>
+</html>
