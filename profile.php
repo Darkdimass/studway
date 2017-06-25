@@ -15,11 +15,16 @@ $news->load_user_news($_GET['id']);
 
 //if (!isset($_SESSION['user']))
 //{header('Location: http://studway');}
-$mysqli = connect();
-$sql = "SELECT * FROM users INNER JOIN additional_data ON users.id = additional_data.user_id WHERE users.id = '{$_GET['id']}'";
-$result = mysqli_query($mysqli, $sql);
-$src = $result->fetch_array();
-$mysqli->close();
+//$mysqli = connect();
+//$sql = "SELECT * FROM users INNER JOIN additional_data ON users.id = additional_data.user_id WHERE users.id = '{$_GET['id']}'";
+//$result = mysqli_query($mysqli, $sql);
+//$src = $result->fetch_array();
+//$mysqli->close();
+$src = new u_info();
+$src->load_user_info($_GET['id']);
+$user = new user();
+$user->load_profile($_GET['id']);
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -54,14 +59,14 @@ $mysqli->close();
 <section class="profile_logo"></section>
 <section class="profilePage">
     <div class="profile_info">
-        <img class="profileImage" src="<? echo $src['ico'];?>">
-        <div class="name"><? echo $src['surname']," ", $src['name'];?> </div>
+        <img class="profileImage" src="<? echo $user->getIco();?>">
+        <div class="name"><? echo $user->getSurname()," ", $user->getName();?> </div>
         <div class="data"><hr class="xs">
-            <div>City: <br> <? echo $src['city']?></div><hr class="xs">
-            <div>Counnews: <br> <? echo $src['counnews']?></div><hr class="xs">
-            <div>Interests:<br> <? echo $src['interests']?></div><hr class="xs">
-            <div>About me: <br><? echo $src['about']?></div><hr class="xs">
-            <div>Else: <br><? echo $src['else']?></div><hr class="xs">
+            <div>City: <br> <? echo $src->getCity()?></div><hr class="xs">
+            <div>Counnews: <br> <? echo $src->getCountry()?></div><hr class="xs">
+            <div>Interests:<br> <? echo $src->getInterests()?></div><hr class="xs">
+            <div>About me: <br><? echo $src->getAbout()?></div><hr class="xs">
+            <div>Else: <br><? echo $src->getElse()?></div><hr class="xs">
         </div>
         <div class="media">
             <img src="/img/ico.jpg" class="photo_profile">

@@ -21,7 +21,16 @@ if (isset($_POST['log_submit'])){
 
 }
 if (isset($_POST['reg_submit'])){
-user::store_user($_POST['login'],$_POST['pswd'],$_POST['name'],$_POST['surname']);
+    $uploaddir = 'F:\OpenServer\OpenServer\domains\studway\img\\';
+    $uploadfile = $uploaddir.basename($_FILES['file']['name']);
+    if (move_uploaded_file($_FILES['file']['tmp_name'], $uploadfile))
+    {
+        $a = user::store_user($_POST['login'],$_POST['pswd'],$_POST['name'],$_POST['surname'],"../img/".$_FILES['file']['name']);
+        u_info::store_user_info($_POST['city'],$_POST['country'],$_POST['interests'],$_POST['about'],$_POST['else'],$a);
+        header("Location: http://studway/profile.php?id=$a");
+    }
+    else { header("Location: http://studway/registration.php"); }
+
 }
 
 if (isset($_GET['action'])){
@@ -31,8 +40,6 @@ if (isset($_GET['action'])){
            session_destroy();
            header("Location: http://studway/index.php");
            break;
-       case "registration":
-           user::store_user($_POST['login'],$_POST['pswd'],$_POST['name'],$_POST['surname']);
-           break;
+
    }
 }

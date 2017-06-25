@@ -68,17 +68,33 @@ class user
         } else return null;
     }
 
-    static function store_user($login, $pswd, $name, $surname)
+    static function store_user($login, $pswd, $name, $surname, $ico)
     {
         $mysqli = connect();
         $sql = "SELECT log FROM users WHERE log = '$login'";
         $result = mysqli_query($mysqli, $sql);
         $result = $result->fetch_array();
         if (!isset($result)){
-        $sql = "INSERT INTO users (log,pass,name,surname) VALUES ('$login','$pswd','$name','$surname')";
+        $sql = "INSERT INTO users (log,pass,name,surname,ico) VALUES ('$login','$pswd','$name','$surname','$ico')";
         mysqli_query($mysqli, $sql);
+            $sql = "SELECT id FROM users WHERE log = '$login'";
+            $result = mysqli_query($mysqli, $sql);
+            $result = $result->fetch_array();
         }
         $mysqli->close();
+        return $result['id'];
+    }
+
+    function load_profile($id)
+    {
+        $mysqli = connect();
+        $sql = "SELECT * FROM users WHERE id = '$id'";
+        $result = mysqli_query($mysqli, $sql);
+        $db = $result->fetch_array();
+        $this->name = $db['name'];
+        $this->surname = $db['surname'];
+        $this->id = $db['id'];
+        $this->ico = $db['ico'];
     }
 
     function access_granted(){
@@ -86,6 +102,87 @@ class user
         $_SESSION['surname'] = $this->surname;
         $_SESSION['id'] = $this->id;
         $_SESSION['ico'] = $this->ico;
+    }
+}
+
+class u_info extends user
+{
+
+    public function getCity()
+    {
+        return $this->city;
+    }
+
+    public function setCity($city)
+    {
+        $this->city = $city;
+    }
+
+    public function getCountry()
+    {
+        return $this->country;
+    }
+
+    public function setCountry($country)
+    {
+        $this->country = $country;
+    }
+
+    public function getInterests()
+    {
+        return $this->interests;
+    }
+
+    public function setInterests($interests)
+    {
+        $this->interests = $interests;
+    }
+
+    public function getAbout()
+    {
+        return $this->about;
+    }
+
+    public function setAbout($about)
+    {
+        $this->about = $about;
+    }
+
+    public function getElse()
+    {
+        return $this->else;
+    }
+
+    public function setElse($else)
+    {
+        $this->else = $else;
+    }
+    private $city, $country, $interests, $about, $else;
+
+    function load_user_info($id)
+    {
+        $mysqli = connect();
+        $sql = "SELECT * FROM additional_data WHERE user_id = '$id'";
+        $result = mysqli_query($mysqli, $sql);
+        $db = $result->fetch_array();
+        if (isset($db)) {
+            $this->city = $db['city'];
+            $this->country = $db['country'];
+            $this->interests = $db['interests'];
+            $this->about = $db['about'];
+            $this->else = $db['else'];
+            $mysqli->close();
+        } else return null;
+    }
+
+
+
+    static function store_user_info($city, $country, $interests, $about, $else, $id)
+    {
+        $mysqli = connect();
+        $sql = "INSERT INTO additional_data (`city`,`country`,`interests`,`about`,`else`,`user_id`) VALUES ('$city','$country','$interests','$about','$else','$id')";
+        mysqli_query($mysqli, $sql);
+        $mysqli->close();
     }
 }
 

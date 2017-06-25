@@ -34,22 +34,44 @@ if (isset($_SESSION['id']))
             </ul>
         </div>
     </nav>
-    <section class="main_logo"></section>
+    <section class="main_logo" style="margin: 15px auto"></section>
     <section class="greeting">
         <div>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Assumenda dolore eum impedit labore modi quisquam similique ullam vitae voluptas. Commodi cumque minima modi nisi, officia quidem ratione reiciendis reprehenderit. Eius.
         </div>
     </section>
     <section class="log_form">
-        <form action="/redirect.php" method="post">
+        <form action="/redirect.php" method="post" enctype="multipart/form-data">
+            <div id="res"></div>
             <input type="text" class="form_element" name="login"  placeholder="Login">
             <input type="text" class="form_element" name="name"  placeholder="Name">
             <input type="text" class="form_element" name="surname"  placeholder="Surname">
-            <input type="password" class="form_element" name="pswd1" placeholder="Password">
-            <input type="password" class="form_element" name="pswd2" placeholder="Password">
+            <input type="text" class="form_element" name="city"  placeholder="City">
+            <input type="text" class="form_element" name="country"  placeholder="Country">
+            <textarea class="form_element area" placeholder="Interests" name="interests"></textarea>
+            <textarea class="form_element area" placeholder="About" name="about"></textarea>
+            <input type="text" class="form_element" placeholder="Else" name="else">
+            <input id="pswd1" type="password" class="form_element" name="pswd1" placeholder="Password">
+            <input id="pswd2" type="password" class="form_element" name="pswd" placeholder="Password">
+            <div class="file_div"><input type="file" class="file" name="file"></div>
             <input type="submit" class=" btn btn-primary form_element log_btn" name="reg_submit" value="LogIn">
+            <div id="res"></div>
         </form>
     </section>
+    <script>
+        window.addEventListener("load",function(){
+            document.getElementById("check").addEventListener("идгк",function(){
+                var pswd1 = document.getElementById("pswd1"), pswd2 = document.getElementById("pswd2");
+                if(pswd1.value!=pswd2.value){
+                    pswd1.value = "";
+                    pswd2.value = "";
+                    document.getElementById("res").innerHTML = "Пароли не совпадают!";
+                }
+                else document.getElementById("res").innerHTML = "Пароли совпадают!";
+            });
+        })
+    </script>
 
+    
     <script type="text/javascript" src="js/jquery-3.2.1.min.js"></script>
     <script type="text/javascript" src="slick/slick.min.js"></script>
 </body>

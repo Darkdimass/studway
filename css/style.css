@@ -1212,7 +1212,7 @@ body {
 }
 .log_form{
   margin: 5px auto;
-  width: 320px;
+  width: 420px;
   height: 170px;
 }
 .log_form form{
@@ -1408,4 +1408,24 @@ hr{
 .photo_profile{
   height: 70px;
   border-radius: 10px;
+}
+.file_div {
+  overflow:hidden;
+  height:20px;
+  cursor:pointer;
+  background:url(../img/btn.png) no-repeat center;
+  margin-top: 10px;
+}
+.file {
+  opacity:0;
+  filter:alpha(opacity:0);
+  font-size:199px;
+  cursor:pointer;
+  padding:0px;
+  margin:0px;
+  border:none;
+  margin-left:-450px;
+}
+.area{
+  height: 80px !important;
 }
